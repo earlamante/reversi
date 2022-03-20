@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Digital Numbers Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Digital Numbers Regular'), url('../fonts/DigitalNumbers-Regular.woff') format('woff');
+}
+
+body {
+
+}
+
+#settings button {
+    background: #f4f4f4;
+    border: 2px solid #3d3d3d;
+}
+
+#settings button.active {
+    background: #5a5a5a;
+    border: 2px solid #3d3d3d;
+    color: #fff;
+}
+
+#game {
+    background: #5a5a5a;
+    position: relative;
+    margin: 0 auto;
+}
+#game.ready {
+    border: 2px solid #000;
+}
+#game .cell {
+    border: 1px solid #000;
+}
+#game .cell {
+    background-color: #485d3f;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: absolute;
+    font-size: 35px;
+    text-align: center;
+    min-width: 1px;
+    min-height: 1px;
+    transition: all 200ms ease-in-out;
+}
+#game .cell.valid-move {
+    background-color: #5f7b54;
+}
+.piece-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+.piece {
+    position: absolute;
+    width: 96%;
+    height: 96%;
+    top: 2%;
+    left: 2%;
+    border: 1px solid #000;
+    border-radius: 100%;
+    transition: transform 200ms ease-in-out;
+}
+.piece-flip {
+    transform: rotateY(90deg);
+}
+.piece--white {
+    background: #fff;
+}
+.piece--black {
+    background: #000;
+}
