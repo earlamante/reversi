@@ -324,8 +324,10 @@ let game = {
                 }
                 break;
             case 'down-left':
-                if(row > (game.rows-1) && col > 0) {
+                if(row < (game.rows-1) && col > 0) {
+                    console.log(row, col);
                     if(!game.key[row+1][col-1]) {
+                        console.log(game.key[row+1][col-1]);
                         if(seek(row, col, -1, 1, sv)) {
                             $('#' + (row + 1) + '-' + (col - 1)).addClass('valid-move');
                         }
@@ -333,7 +335,7 @@ let game = {
                 }
                 break;
             case 'down-right':
-                if(row > (game.rows-1) && col < (game.cols-1)) {
+                if(row < (game.rows-1) && col < (game.cols-1)) {
                     if(!game.key[row+1][col+1]) {
                         if(seek(row, col, -1, -1, sv)) {
                             $('#' + (row + 1) + '-' + (col + 1)).addClass('valid-move');
