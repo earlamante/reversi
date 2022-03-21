@@ -9,6 +9,22 @@ body {
 
 }
 
+#overlay {
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    z-index: -99;
+}
+
+#overlay.show {
+    opacity: 1;
+    z-index: 99;
+}
+
 #settings button {
     background: #f4f4f4;
     border: 2px solid #3d3d3d;
@@ -18,6 +34,41 @@ body {
     background: #5a5a5a;
     border: 2px solid #3d3d3d;
     color: #fff;
+}
+
+#settings .top-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#settings .top-menu a {
+    height: 25px;
+    vertical-align: bottom;
+}
+
+a.close {
+    width: 25px;
+    line-height: 20px;
+    border: 2px solid #000;
+    border-radius: 100%;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+}
+
+#menu a {
+    background: #f4f4f4;
+    border: 2px solid #3d3d3d;
+    display: inline-block;
+    max-width: 300px;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 21px;
+    color: #000;
+    width: 100%;
 }
 
 #game {

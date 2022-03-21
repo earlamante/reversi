@@ -7,11 +7,14 @@ let game = {
         total: 4,
         loading: false,
         tries: 0,
+        cpu: 0
     };
 (function ($) {
     let gs = $('#game'),
         d = $('#data'),
-        cp =$('#current-player');
+        cp =$('#current-player'),
+        o = $('#overlay'),
+        s = $('#settings');
 
     gs
         .on('click', '.cell', function (e) {
@@ -19,14 +22,7 @@ let game = {
             if(game.loading) return;
             let c = $(this);
             if(c.hasClass('valid-move')) {
-                game.loading = true;
-                game.tries = 0;
-                put(c);
-                check_reverse_cell(c);
-                setTimeout(function() {
-                    game.loading = false;
-                    next_board();
-                }, 400);
+                make_move(c);
             }
         })
         .on('contextmenu', '.cell', function (e) {
@@ -34,6 +30,7 @@ let game = {
         });
 
     function init() {
+        game.cpu = d.data('player2') === 'cpu';
         prepare();
         start();
     }
@@ -66,12 +63,18 @@ let game = {
             }
             else {
                 setTimeout(function() {
-                    if(!alert('No valid moves. Skip your turn.')) {
+                    if(!alert('No valid moves. Skip turn.')) {
                         game.tries++;
                         next_board();
                     }
                 }, 100);
             }
+        }
+
+        if(np === 'piece--white' && game.cpu) {
+            go_cpu();
+        } else {
+            game.loading = false;
         }
     }
 
@@ -80,6 +83,16 @@ let game = {
             top: row * game.cs + 'px',
             left: col * game.cs + 'px'
         });
+    }
+
+    function make_move(c) {
+        game.loading = true;
+        game.tries = 0;
+        put(c);
+        check_reverse_cell(c);
+        setTimeout(function() {
+            next_board();
+        }, 400);
     }
 
     function put(c) {
@@ -192,6 +205,9 @@ let game = {
             height: game.rows * game.cs + 4 + 'px'
         });
         d.css({
+            width: game.cols * game.cs + 4 + 'px',
+        });
+        s.css({
             width: game.cols * game.cs + 4 + 'px',
         });
 
@@ -323,6 +339,14 @@ let game = {
                 }
                 break;
         }
+    }
+
+    function go_cpu() {
+        o.addClass('show');
+        setTimeout(function() {
+            o.removeClass('show');
+            make_move(gs.find('.valid-move').eq(Math.floor(Math.random() * gs.find('.valid-move').length)));
+        }, (Math.floor(Math.random() * 2000) + 1000));
     }
     init();
 })(jQuery);
