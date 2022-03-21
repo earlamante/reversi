@@ -56,10 +56,12 @@ let game = {
 
         if(game.total === (game.rows * game.cols)) {
             game_over();
+            return false;
         }
         else if(gs.find('.valid-move').length == 0) {
             if( game.tries > 0 ) {
                 game_over(false);
+                return false;
             }
             else {
                 setTimeout(function() {
@@ -68,6 +70,7 @@ let game = {
                         next_board();
                     }
                 }, 100);
+                return false;
             }
         }
 
